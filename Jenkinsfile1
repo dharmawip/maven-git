@@ -1,0 +1,23 @@
+node
+{
+    stage('clonning from GIT'){
+git branch: 'master', credentialsId: '', url: '
+     }
+
+stage('SonarQube Analysis') {
+    def scannerHome = tool 'SonarQube'
+      withSonarQubeEnv('SonarQube') {
+      sh """/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube/bin/sonar-scanner \
+     -D sonar.projectVersion=1.0-SNAPSHOT \
+       -D sonar.login=admin \
+      -D sonar.password=admin \
+      -D sonar.projectBaseDir=/var/lib/jenkins/workspace/jenkins-sonar/ \
+        -D sonar.projectKey=app \
+        -D sonar.sourceEncoding=UTF-8 \
+        -D sonar.language=java \
+        -D sonar.sources=app \
+        -D sonar.tests=test \
+        -D sonar.host.url=http://192.168.1.59:9000/"""
+        }
+}
+}
