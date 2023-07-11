@@ -1,7 +1,7 @@
 node
 {
     stage('clonning from GIT'){
-git branch: 'master', credentialsId: '', url: '
+git branch: 'master', credentialsId: 'dharmareddy', url:https://github.com/dharmawip/maven-git.git'
      }
 
 stage('SonarQube Analysis') {
