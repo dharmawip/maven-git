@@ -22,7 +22,7 @@
       <id>sonar</id>
       <activation>
         <activeByDefault>true</activeByDefault>
-        <activations>
+      </activations>
           <properties>
             <!-- Optional URL to server.Default value is http://localhost:9000 -->
             <sonar.host.url>
@@ -33,7 +33,7 @@
     <profile>
       <id>coverage</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+      </activeByDefault>true</activeByDefault>
       </activation>
       <build>
         <plugins>
