@@ -17,7 +17,7 @@ stage('SonarQube Analysis') {
         -D sonar.language=java \
         -D sonar.sources=app.java\
         -D sonar.tests=test.java\
-        -D sonar.host.url=http://3.143.3.6:9000/"""
+        -D sonar.host.url=http://10.52.50.208:9000/"""
         }
 }
 }
