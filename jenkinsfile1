@@ -1,7 +1,7 @@
 node
 {
     stage('clonning from GIT'){
-git branch: 'master', credentialsId: 'GIT_REPO', url: 'https://github.com/dharmawip/maven-git.git'
+git branch: 'master', credentialsId: 'sonarqubetoken', url: 'https://github.com/dharmawip/maven-git.git'
      }
 
 stage('SonarQube Analysis') {
@@ -11,7 +11,7 @@ stage('SonarQube Analysis') {
      -D sonar.projectVersion=1.0-SNAPSHOT \
        -D sonar.login=admin \
       -D sonar.password=admin \
-   -D sonar.projectBaseDir=C:\ProgramData\Jenkins\.jenkins\workspace\maven/ 
+   -D sonar.projectBaseDir=\ProgramData\Jenkins\.jenkins\workspace\maven/ 
         -D sonar.projectKey=App\
         -D sonar.sourceEncoding=UTF-8 \
         -D sonar.language=java \
