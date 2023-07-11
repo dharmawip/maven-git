@@ -7,7 +7,7 @@ git branch: 'master', credentialsId: 'sonarqubetoken', url: 'https://github.com/
 stage('SonarQube Analysis') {
     def scannerHome = tool 'SonarQube'
       withSonarQubeEnv('SonarQube') {
-      sh """C:\Users\user\sonarqube-9.7.1.62043\bin\windows-x86-64\
+      sh """\Users\user\sonarqube-9.7.1.62043\bin\windows-x86-64\
      -D sonar.projectVersion=1.0-SNAPSHOT \
        -D sonar.login=admin \
       -D sonar.password=admin \
