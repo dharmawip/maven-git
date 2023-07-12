@@ -7,16 +7,16 @@ git branch: 'master', credentialsId: 'dharmareddy', url: 'https://github.com/dha
 stage('SonarQube Analysis') {
     def scannerHome = tool 'SonarQube'
       withSonarQubeEnv('SonarQube') {
-     -D sonar.projectVersion=1.0-SNAPSHOT \
-       -D sonar.login=admin \
-      -D sonar.password=admin \
-      -D sonar.projectBaseDir=/var/lib/jenkins/workspace/jenkins-sonar/ \
-        -D sonar.projectKey=app \
-        -D sonar.sourceEncoding=UTF-8 \
-        -D sonar.language=java \
-        -D sonar.sources=app \
-        -D sonar.tests=test \
-        -D sonar.host.url=http://192.168.1.59:9000/"""
+      sonar.projectVersion=1.0-SNAPSHOT \
+        sonar.login=admin \
+       sonar.password=admin \
+       sonar.projectBaseDir=/var/lib/jenkins/workspace/jenkins-sonar/ \
+         sonar.projectKey=app \
+         sonar.sourceEncoding=UTF-8 \
+         sonar.language=java \
+         sonar.sources=app \
+         sonar.tests=test \
+         sonar.host.url=http://192.168.1.59:9000/"""
         }
 }
 }
