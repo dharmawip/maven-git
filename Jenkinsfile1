@@ -22,7 +22,7 @@ pipeline {
         }
     stage('Sonarqube') {
     environment {
-        scannerHome = tool 'Sonar'
+        SonarqubeScanner = tool name: 'sonarqubescanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
     }
     steps {
        withSonarQubeEnv(credentialsId: 'sonarqubetoken') {
