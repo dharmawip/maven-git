@@ -1,20 +1,59 @@
-node
-{
-    stage('clonning from GIT'){
-git branch: 'master', credentialsId: 'dharmareddy', url: 'https://github.com/dharmawip/maven-git.git'
-     }
+pipeline {
+    agent any
 
-stage('SonarQube Analysis') {
-    def scannerHome = tool 'SonarQube'
-      withSonarQubeEnv('SonarQube') {
-      sonar.login=admin \
-      sonar.password=admin \
-      sonar.projectKey=app \
-      sonar.sourceEncoding=UTF-8 \
-      sonar.language=java \
-      sonar.sources=src/myappmain/app.java \
-      sonar.tests=src/testapp/test.java \
-      sonar.host.url=http://192.168.1.59:9000/"""
+    tools {
+        // auto installed maven
+        maven "Maven"
+    }
+
+    stages {
+        stage('cleanup')
+        {
+            steps{
+                deleteDir()
+            }
+        }
+        stage('Git Checkout') {
+            steps {
+                
+                git credentialsId: 'dharmareddy', url: 'https://github.com/dharmawip/maven-git.git'
+            }
+
+        }
+        stage('maven and jacoco') {
+            steps {
+                sh 'mvn clean install'
+                //sh 'mvn sonar:sonar'
+            }
+
+        }
+        stage('Sonarqube') {
+    environment {
+        scannerHome = tool 'Sonar'
+    }
+    steps {
+        withSonarQubeEnv('SonarServer') {
+            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=java_maven -Dsonar.sources=. -Dsonar.java.binaries=target/classes/com/mycompany/app/ "
+            //sh "${scannerHome}/bin/sonar-scanner"
+          echo 'some'
+        }
+        }
+    }
+    stage("Quality gate") {
+            steps {
+                waitForQualityGate abortPipeline: true
+               echo 'some'
+            }
+        }
+    
+        stage('Deploy') {
+            steps {
+                //sh 'mvn test'
+                echo 'deploying to nexus of target server'
+            }
+
+        }
+    }
 }
-}
-}
+
+
