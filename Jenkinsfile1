@@ -20,8 +20,8 @@ pipeline {
             }
 
         }
-   stage('sonar-scanner') {
-            def sonarqubeScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+        stage('sonar-scanner') {
+            ScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
             withCredentials([string(credentialsId: 'sonarqubetoken', variable: 'sonarLogin')]) {
          sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=java_maven -Dsonar.sources=. -Dsonar.java.binaries=target/classes/com/mycompany/app/ "
             //sh "${scannerHome}/bin/sonar-scanner"
