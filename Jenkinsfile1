@@ -20,12 +20,16 @@ pipeline {
             }
 
         }
-        stage('sonar-scanner') {
-            ScannerHome = tool name: 'sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-            withCredentials([string(credentialsId: 'sonarqubetoken', variable: 'sonarLogin')]) {
-         sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=java_maven -Dsonar.sources=. -Dsonar.java.binaries=target/classes/com/mycompany/app/ "
+          stage('Sonarqube') {
+    environment {
+        scannerHome = tool 'Sonar'
+    }
+    steps {
+        withSonarQubeEnv('SonarServer') {
+            sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=java_maven -Dsonar.sources=. -Dsonar.java.binaries=target/classes/com/mycompany/app/ "
             //sh "${scannerHome}/bin/sonar-scanner"
           echo 'some'
+        }
         }
     }
        
