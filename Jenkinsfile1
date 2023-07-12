@@ -20,14 +20,7 @@ pipeline {
             }
 
         }
-        stage('maven and jacoco') {
-            steps {
-                sh 'mvn clean install'
-                //sh 'mvn sonar:sonar'
-            }
-
-        }
-        stage('Sonarqube') {
+       stage('Sonarqube') {
     environment {
         scannerHome = tool 'Sonar'
     }
